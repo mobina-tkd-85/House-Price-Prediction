@@ -71,19 +71,21 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
-      <input type="text" name="CRIM" placeholder="CRIM" required="required" /><br>
-    	<input type="text" name="ZN" placeholder="ZN" required="required" /><br>
-        <input type="text" name="INDUS" placeholder="INDUS" required="required" /><br>
-        <input type="text" name="CHAS" placeholder="CHAS" required="required" /><br>
-        <input type="text" name="NOX" placeholder="NOX" required="required" /><br>
-        <input type="text" name="RM" placeholder="RM" required="required" /><br>
-        <input type="text" name="Age" placeholder="Age" required="required" /><br>
-        <input type="text" name="DIS" placeholder="DIS" required="required" /><br>
-        <input type="text" name="RAD" placeholder="RAD" required="required" /><br>
-        <input type="text" name="TAX" placeholder="TAX" required="required" /><br>
-        <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" /><br>
-        <input type="text" name="B" placeholder="B" required="required" /><br>
-        <input type="text" name="LSTAT" placeholder="LSTAT" required="required" /><br>
+
+      <input type="number" name="bedrooms" placeholder="bedrooms" required="required" /><br>
+    	<input type="number" name="bathrooms" placeholder="bathrooms" required="required" /><br>
+        <input type="number" name="sqft_living" placeholder="sqft_living" required="required" /><br>
+        <input type="number" name="sqft_lot" placeholder="sqft_lot" required="required" /><br>
+        <input type="number" name="floors" placeholder="floors" required="required" /><br>
+        <input type="number" name="condition" placeholder="condition" required="required" /><br>
+        <input type="number" name="grade" placeholder="grade" required="required" /><br>
+        <input type="number" name="sqft_above" placeholder="sqft_above" required="required" /><br>
+        <input type="number" name="yr_built" placeholder="yr_built" required="required" /><br>
+        <input type="number" name="zipcode" placeholder="zipcode" required="required" /><br>
+        <input type="number" name="lat" placeholder="lat" required="required" /><br>
+        <input type="number" name="long" placeholder="long" required="required" /><br>
+        <input type="number" name="sqft_living15" placeholder="sqft_living15" required="required" /><br>
+        <input type="number" name="sqft_lot15" placeholder="sqft_lot15" required="required" /><br>
 
        
 

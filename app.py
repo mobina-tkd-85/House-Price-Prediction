@@ -2,6 +2,8 @@ import pickle
 from flask import Flask,request,app,jsonify,url_for,render_template
 import numpy as np
 import pandas as pd
+import sklearn
+print(sklearn.__version__)
 
 app = Flask(__name__)
 model = pickle.load(open('housepred.pkl','rb'))
@@ -27,6 +29,7 @@ def predict():
     final_input=scaler.transform(np.array(data).reshape(1,-1))
     print(final_input)
     output=model.predict(final_input)[0]
+    output = round(output, 2)
     return render_template("home.html",prediction_text="The House price prediction is {}".format(output))
 
 
