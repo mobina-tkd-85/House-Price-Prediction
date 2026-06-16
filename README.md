@@ -1,93 +1,140 @@
-# House-Price-Prediction with Machine Learning
+# 🏡 House Price Prediction with Machine Learning
 
-# About the Project
+## About the Project
 
-This project aims to develop a machine learning model that accurately predicts housing prices using the Boston Housing dataset. By analyzing various features of houses, such as crime rate, number of rooms, and accessibility to highways, the model provides valuable insights for potential buyers or sellers in estimating housing prices. The project utilizes the powerful CatBoostRegressor algorithm for optimal performance and incorporates techniques like data preprocessing, exploratory data analysis, and model training. The trained model can be used as a tool to make informed decisions in the real estate market. 
+This project builds a robust machine learning model to estimate housing prices using a modern, feature-rich dataset from Kaggle. The model leverages the powerful **CatBoostRegressor** algorithm, combined with thorough data preprocessing, exploratory analysis, and hyperparameter tuning. The final model is deployed via a Flask web application, making it easy for users to input property features and receive instant price predictions.
 
-![logo](https://github.com/KalyanMurapaka45/House-Price-Prediction/blob/main/Output/Screenshot%202023-05-16%20041823.png)
+Unlike older implementations that rely on the deprecated Boston Housing dataset, this project uses an up‑to‑date Kaggle dataset — the **House Prices: Advanced Regression Techniques** dataset — which includes more relevant features and better reflects current real‑estate dynamics. The project is a fork of an existing repository, but I have significantly modified the data pipeline, feature engineering, and model configuration to suit this new dataset.
 
-## Built With
+![Prediction Interface](https://github.com/KalyanMurapaka45/House-Price-Prediction/blob/main/Output/Screenshot%202023-05-16%20041823.png)
 
- - Flask
- - pandas
- - numpy
- - matplotlib
- - scikit-learn
- - catboost
- - gunicorn
- 
- # Getting Started
-This is make you understand how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
+---
 
-1. Clone the repo
+### Built With
 
-```
-git clone https://github.com/KalyanMurapaka45/Spam-Email-Detection.git
-```
+- **Flask** – web framework for deployment  
+- **pandas** & **numpy** – data manipulation  
+- **matplotlib** – visualization  
+- **scikit-learn** – preprocessing & metrics  
+- **catboost** – gradient boosting engine  
+- **gunicorn** – production WSGI server  
 
-2. Install the required libraries
+---
 
-```
-pip install -r requirements.txt
-```
+## Getting Started
 
-3. Open and execute .ipynb file (After complete Execution you will get a .pkl file for project Deployment)
+Follow these steps to set up the project locally.
 
-# Dataset Description
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
 
-## Boston Housing Dataset
+### Installation
 
-The Boston Housing dataset is imported from the `sklearn.datasets` module in Python. It consists of a total of 506 instances, each representing a house in the Boston area. The dataset contains 13 numerical features that describe various aspects of the houses, such as crime rate, average number of rooms, and proximity to employment centers. The target variable is the median value of owner-occupied homes in thousands of dollars.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/House-Price-Prediction.git
+   cd House-Price-Prediction
+   ```
 
-### Features
+2. **Install required libraries**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1. CRIM: Per capita crime rate by town
-2. ZN: Proportion of residential land zoned for lots over 25,000 sq. ft.
-3. INDUS: Proportion of non-retail business acres per town
-4. CHAS: Charles River dummy variable (1 if tract bounds river; 0 otherwise)
-5. NOX: Nitric oxide concentration (parts per 10 million)
-6. RM: Average number of rooms per dwelling
-7. AGE: Proportion of owner-occupied units built prior to 1940
-8. DIS: Weighted distances to five Boston employment centers
-9. RAD: Index of accessibility to radial highways
-10. TAX: Full-value property tax rate per $10,000
-11. PTRATIO: Pupil-teacher ratio by town
-12. B: 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town
-13. LSTAT: Percentage of lower status of the population
+3. **Run the Jupyter notebook** (optional)
+   - Open and execute `HousePricePrediction.ipynb` to train the model.
+   - This will generate the pickle files (`housepred.pkl` and `scaler.pkl`) needed for deployment.
 
-### Target Variable
+4. **Launch the Flask app**
+   ```bash
+   python app.py
+   ```
+   The app will be available at `http://127.0.0.1:5000`.
 
-- MEDV: Median value of owner-occupied homes in $1000s
+---
 
-# Data Preprocessing
+## Dataset Description
 
-The Boston Housing dataset is preprocessed before training the machine learning model. The dataset is imported and split into input features (X) and the target variable (y). The input features are then standardized using the `StandardScaler` from the `sklearn.preprocessing` module to ensure that all features have a similar scale. The preprocessed dataset is further divided into training and testing sets using a 80:20 train-test split ratio.
+I have replaced the outdated Boston Housing dataset with the **Kaggle House Prices** dataset, which contains 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa. This dataset is widely used for regression competitions and provides a much richer learning experience.
 
-# Model Training and Evaluation
+### Key Features (subset used in this project)
 
-A CatBoostRegressor model is trained using the preprocessed dataset. The model is built to predict housing prices based on the given features. Hyperparameter tuning is performed using a RandomizedSearchCV approach from the `sklearn.model_selection` module. The best set of hyperparameters is selected based on 5-fold cross-validation. The model is trained on the training set using the optimized hyperparameters. The trained CatBoostRegressor model is evaluated using the testing set. The predicted housing prices are compared to the actual prices, and the performance of the model is assessed using the R-squared metric.
+| Feature             | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| **bedrooms**        | Number of bedrooms above grade                                   |
+| **bathrooms**       | Number of bathrooms (full + half)                                |
+| **sqft_living**     | Living area in square feet                                       |
+| **sqft_lot**        | Lot area in square feet                                          |
+| **floors**          | Number of floors (e.g., 1.0, 1.5, 2.0)                          |
+| **condition**       | Overall condition of the house (1–5)                            |
+| **grade**           | Overall grade given to the housing unit (1–13)                  |
+| **sqft_above**      | Square footage of the house above ground                        |
+| **yr_built**        | Year the house was built                                         |
+| **zipcode**         | Postal code / area code                                          |
+| **lat**             | Latitude coordinate                                              |
+| **long**            | Longitude coordinate                                             |
+| **sqft_living15**   | Living area of the 15 nearest neighbors (avg)                   |
+| **sqft_lot15**      | Lot area of the 15 nearest neighbors (avg)                      |
 
-- Algorithm Used: ```Catboost Algorithm``` 
+> **Target variable**: `price` – the sale price of the house in USD.
 
-# Model Deployment
+The dataset is sourced from Kaggle's House Prices competition. I have preprocessed it by handling missing values, encoding categorical variables, and scaling numerical features to ensure optimal model performance.
 
-This project includes a Flask-based web application for deploying the house price prediction model. The model is loaded from the saved pickle file ('housepred.pkl'), and the scaler object is loaded from 'scaler.pkl' for preprocessing the input data. The web application allows users to input the necessary features of a house through a form or API request, and it returns the predicted house price.
+---
 
-# Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+## Data Preprocessing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+- **Handling missing values**: Imputation using median/mode or domain-specific defaults.
+- **Feature encoding**: One‑hot encoding for categorical variables.
+- **Standardization**: Numerical features are scaled using `StandardScaler` to bring them to a similar magnitude.
+- **Train‑test split**: 80% training, 20% testing (stratified where applicable).
 
-1. Fork the Project
-2. Create your Feature Branch
-3. Commit your Changes
-4. Push to the Branch
-5. Open a Pull Request
+All preprocessing steps are stored in a `scaler.pkl` file to apply the same transformations during inference.
 
-# License
+---
 
-Distributed under the GNU General Public License v3.0. See ```LICENSE.txt``` for more information.
+## Model Training & Evaluation
 
-# Acknowledgements
-This project was inspired by the Kaggle dataset on Boston House Price Prediction and the corresponding competition. We also acknowledge the open-source Python libraries used in this project and their contributors.
+The core algorithm is **CatBoostRegressor**, chosen for its ability to handle categorical features natively and its robust performance with minimal tuning.
+
+- **Hyperparameter tuning**: Performed using `RandomizedSearchCV` with 5‑fold cross‑validation to find the best combination of learning rate, depth, and regularization parameters.
+- **Evaluation metric**: R‑squared (coefficient of determination) on the test set.
+- **Final model**: Saved as `housepred.pkl` for deployment.
+
+---
+
+## Deployment
+
+The Flask web application (`app.py`) loads the trained model and scaler, exposes a user‑friendly HTML interface, and returns predictions in real time. Users can input the 14 key features (as listed above) and receive an estimated price instantly.
+
+The application is container‑ready and can be deployed on platforms like Heroku, AWS, or any standard Python‑hosting service using Gunicorn.
+
+---
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements, please fork the repository and create a pull request. You can also open an issue with the "enhancement" tag.
+
+1. Fork the Project  
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)  
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)  
+4. Push to the Branch (`git push origin feature/AmazingFeature`)  
+5. Open a Pull Request  
+
+Don't forget to give the project a ⭐ — it helps others discover it!
+
+---
+
+## License
+
+Distributed under the GNU General Public License v3.0. See `LICENSE.txt` for more information.
+
+---
+
+## Acknowledgements
+
+- This project was inspired by the Kaggle competition *House Prices: Advanced Regression Techniques*.
+- Special thanks to the open‑source Python ecosystem — pandas, scikit‑learn, CatBoost, and Flask — for making this work possible.
+- The original repository by KalyanMurapaka45 served as a foundation; I have since adapted it to use a modern dataset and enhanced the preprocessing pipeline.
 
